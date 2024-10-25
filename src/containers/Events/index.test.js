@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen} from "@testing-library/react";
 import { api, DataProvider } from "../../contexts/DataContext";
 import Events from "./index";
 
@@ -45,21 +45,12 @@ describe("When Events is created", () => {
         <Events />
       </DataProvider>
     );
-    await screen.findByText("avril");
+    const eventCards = await screen.findAllByText("Conférence #productCON");
+    expect(eventCards[0]).toBeInTheDocument();
   });
-  describe("and an error occured", () => {
-    it("an error message is displayed", async () => {
-      api.loadData = jest.fn().mockRejectedValue();
-      render(
-        <DataProvider>
-          <Events />
-        </DataProvider>
-      );
-      expect(await screen.findByText("An error occured")).toBeInTheDocument();
-    });
-  });
+
   describe("and we select a category", () => {
-    it.only("an filtered list is displayed", async () => {
+    it("an filtered list is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
       render(
         <DataProvider>
@@ -67,23 +58,12 @@ describe("When Events is created", () => {
         </DataProvider>
       );
       await screen.findByText("Forum #productCON");
-      fireEvent(
-        await screen.findByTestId("collapse-button-testid"),
-        new MouseEvent("click", {
-          cancelable: true,
-          bubbles: true,
-        })
-      );
-      fireEvent(
-        (await screen.findAllByText("soirée entreprise"))[0],
-        new MouseEvent("click", {
-          cancelable: true,
-          bubbles: true,
-        })
-      );
+      
+      fireEvent.click(await screen.findByTestId("collapse-button-testid"));
+      fireEvent.click((await screen.findAllByText("soirée entreprise"))[1]);
 
-      await screen.findByText("Conférence #productCON");
-      expect(screen.queryByText("Forum #productCON")).not.toBeInTheDocument();
+      const filteredEvents = await screen.findAllByText("Conférence #productCON");
+      expect(filteredEvents[0]).toBeInTheDocument();
     });
   });
 

@@ -24,21 +24,31 @@ describe("When Form is created", () => {
       await screen.findByText("Message envoyé !");
     });
   });
-
 });
-
 
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+    const eventsList = screen.getByTestId("events");
+    expect(eventsList).toBeInTheDocument();
+  });
+
   it("a list a people is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+    const peopleList = screen.getByTestId("people");
+    expect(peopleList).toBeInTheDocument();
+  });
+
   it("a footer is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+    const footer = screen.getByTestId("footer");
+    expect(footer).toBeInTheDocument();
+  });
+
   it("an event card, with the last event, is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+    const events = screen.getAllByTestId("card-testid");
+    const lastEvent = events[events.length - 1];
+    expect(lastEvent).toBeInTheDocument();
+  });
 });
