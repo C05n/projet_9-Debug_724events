@@ -31,7 +31,7 @@ export const DataProvider = ({ children }) => {
     getData();
   });
 
-  const last = useCallback(() => {
+  const Last = useCallback(() => {
     if (data?.events) {
       return data.events.reduce((latest, current) => 
         new Date(latest.date) > new Date(current.date) ? latest : current
@@ -46,7 +46,7 @@ export const DataProvider = ({ children }) => {
       value={{
         data,
         error,
-        last,
+        Last,
       }}
     >
       {children}
