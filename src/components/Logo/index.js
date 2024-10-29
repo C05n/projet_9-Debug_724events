@@ -2,6 +2,8 @@
 import PropTypes from "prop-types";
 import "./style.scss";
 
+ /* Intégration du Camel Case sur les propriétés 'FontSize, FontFamily, FontWeight et WhiteSpace' pour résoudre les erreurs présentes dans la console */ 
+
 const Logo = ({ fontSize }) => (
   <div className="Logo">
     <svg

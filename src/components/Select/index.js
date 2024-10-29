@@ -17,6 +17,7 @@ const Select = ({
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
     onChange(newValue);
+     /* Ajout de 'newValue' pour assurer la synchronisation avec la valeur définie dans les filtres */  
     setValue(newValue);
     setCollapsed(newValue);
   };

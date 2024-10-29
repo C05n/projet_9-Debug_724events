@@ -15,6 +15,7 @@ import { useData } from "../../contexts/DataContext";
 const Page = () => {
   const { Last } = useData();
   const LastEvent = Last && typeof Last === 'function' ? Last() : null;
+  /* Récupère la fonction Last, vérifie que Last existe et si 'oui' alors récupère les données de l'évenement le plus récent */ 
   return <>
     <header>
       <Menu />
@@ -117,6 +118,7 @@ const Page = () => {
     <footer data-testid='footer' className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
+        {/* Utilisation de la fonction LastEvent pour définir les différente données à récupérer */}
         <EventCard
           imageSrc={LastEvent?.cover || ''}
           title={LastEvent?.title || ''}
